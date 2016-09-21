@@ -108,7 +108,7 @@ our sub MAIN_HELPER($retval = 0) is export {
     for &main.candidates -> &main-candidate {
         next unless &main-candidate ~~ SubCommand;
         next unless &main-candidate.sub-command eq any(|@*ARGS);
-        note &main-candidate.sub-command;
+        #note &main-candidate.sub-command;
 
         $args = order-options(&main-candidate.signature, @*ARGS);
         last if &main.cando($args);
