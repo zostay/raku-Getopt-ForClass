@@ -44,13 +44,13 @@ This routine is exported by default. Given a C<$class>, it will inspect that cla
 
 Specifically, it does the following:
 
-=item 1. One C<MAIN> multisub candidate is generated for each method in the class (limited by the smartmatch in C<$methods>, see below).
+=item One C<MAIN> multisub candidate is generated for each method in the class (limited by the smartmatch in C<$methods>, see below).
 
-=item 2. Each C<MAIN> candidate will provide command-line options based upon the C<BUILD> submethod for the class. If no C<BUILD> is provided, then no attributes will be set during construction.
+=item Each C<MAIN> candidate will provide command-line options based upon the C<BUILD> submethod for the class. If no C<BUILD> is provided, then no attributes will be set during construction.
 
-=item 3. The first positional argument accepted by each C<MAIN> candidate is the name of one of the methods in the class.
+=item The first positional argument accepted by each C<MAIN> candidate is the name of one of the methods in the class.
 
-=item 4. The remaining positional and named arguments for each C<MAIN> candidate are those taken from C<BUILD> and those taken from the method of the class this candidate is associated with.
+=item The remaining positional and named arguments for each C<MAIN> candidate are those taken from C<BUILD> and those taken from the method of the class this candidate is associated with.
 
 When run, the C<MAIN> method will first construct an object by calling the C<new> method and passing to that method the same parameters as are defined in C<BUILD>. It will then call the method for the selected candidate passing to that method all the arguments given on the command-line.
 
@@ -62,15 +62,15 @@ In addition to generating the C<MAIN> routine, this module also provides a C<MAI
 
 This implementation will attempt to locate the most appropriate C<MAIN> candidate using parameters given on the command-line. It will then organize and pass the command-line parameters to the C<MAIN> candidate. This works somewhat differently from the Perl6 native C<MAIN_HELPER> (at least as of this writing):
 
-=item * Any parameter of the form C<--NAME=VALUE> will be treated as a named parameter. If the candidate explicitly defines that named parameter with a numeric type, the value will be converted to a number before being passed. If it defines a boolean type, the value will be converted to False if it matches "1", "y", "yes", or "true" (using a case insensitive match) and True otherwise. Otherwise, the string will be passed as is.
+=item Any parameter of the form C<--NAME=VALUE> will be treated as a named parameter. If the candidate explicitly defines that named parameter with a numeric type, the value will be converted to a number before being passed. If it defines a boolean type, the value will be converted to False if it matches "1", "y", "yes", or "true" (using a case insensitive match) and True otherwise. Otherwise, the string will be passed as is.
 
-=item * Any parameter of the form C<--NAME> will be treated as a named parameter. If the candidate explicityly defines that named parameter as boolean, it will be set to a True value. Any other type is assumed to require a parameter so the next argument on the command-line must be a parameter. If the type of the named parameter is numeric, the value will be coerced into a number before being passed.
+=item Any parameter of the form C<--NAME> will be treated as a named parameter. If the candidate explicityly defines that named parameter as boolean, it will be set to a True value. Any other type is assumed to require a parameter so the next argument on the command-line must be a parameter. If the type of the named parameter is numeric, the value will be coerced into a number before being passed.
 
-=item * Any parameter of the form C<--no-NAME> will be treated as a named parameter. The named parameter will be set to False.
+=item Any parameter of the form C<--no-NAME> will be treated as a named parameter. The named parameter will be set to False.
 
-=item * Any parameter following C<--> will be treated as a positional parameter, even if it takes on one of the forms named above.
+=item Any parameter following C<--> will be treated as a positional parameter, even if it takes on one of the forms named above.
 
-=item * Any other parameter is treated as a positional parameter. Positional parameters will be converted to boolean or numbers based upon type.
+=item Any other parameter is treated as a positional parameter. Positional parameters will be converted to boolean or numbers based upon type.
 
 This implementation is less picky about the ordering of parameters than the built-in Perl 6 implementation that is in place as of this writing.
 
