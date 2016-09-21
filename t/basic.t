@@ -1,7 +1,7 @@
 #!/usr/bin/env perl6
 use v6;
 
-use ClIify;
+use Getopt::ForClass;
 use Test;
 
 class TestClass {
@@ -16,7 +16,7 @@ class TestClass {
     method not-command($x) { 4 }
 }
 
-my &test-main = cli-ify(
+my &test-main = build-main-for-class(
     class   => TestClass,
     methods => rx/^ "command-" /,
 );

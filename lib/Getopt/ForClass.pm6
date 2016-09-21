@@ -1,4 +1,5 @@
-unit module CLIify;
+unit module Getopt::ForClass;
+use v6;
 
 our sub order-options($sig, @args is copy) {
     my (@pos, %names);
@@ -87,7 +88,7 @@ our sub order-options($sig, @args is copy) {
         }
     }
 
-    dd \(|@pos, |%names);
+    #dd \(|@pos, |%names);
     \(|@pos, |%names);
 }
 
@@ -117,10 +118,10 @@ our sub MAIN_HELPER($retval = 0) is export {
     main(|$args);
 }
 
-# usage: our &MAIN := cli-ify(...);
+# usage: our &MAIN := build-main-for-class(...);
 
-sub cli-ify(
-    :$class!,      #= The class to cli-ify.
+sub build-main-for-class(
+    :$class!,      #= The class for which to build MAIN.
     :$methods = *, #= Smartmatcher naming methods to make available on the command-line.
 ) returns Routine:D is export {
     my $class-name  = $class.^name;

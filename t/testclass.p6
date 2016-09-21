@@ -2,7 +2,7 @@
 use v6;
 
 use lib 'lib';
-use CLIify;
+use Getopt::ForClass;
 
 class TestClass {
     has $.foo;
@@ -16,7 +16,7 @@ class TestClass {
     method not-command($x) { say 'four' }
 }
 
-my &MAIN = cli-ify(
+my &MAIN = build-main-for-class(
     class   => TestClass,
     methods => rx/^ "command-" /,
 );
