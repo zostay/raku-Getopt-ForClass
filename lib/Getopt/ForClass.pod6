@@ -28,6 +28,8 @@
 
 =begin DESCRIPTION
 
+B<Experimental.> This works partly through some undocumented internals and may not even be done very well. It's more of a proof-of-concept than anything else.
+
 This module exports a function, C<build-main-for-class>, which takes a class type and uses it to setup a C<MAIN> function that is able to execut the various methods of that class as sub-commands of the script.
 
 =end DESCRIPTION

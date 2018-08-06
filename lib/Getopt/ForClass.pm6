@@ -100,7 +100,29 @@ my multi trait_mod:<is> (Routine $sub, :$sub-command!) {
     $sub does SubCommand[$sub-command];
 }
 
-our sub MAIN_HELPER($retval = 0) is export {
+our proto MAIN_HELPER(|) is export { * }
+
+# Perl 6.c
+multi MAIN_HELPER($retval = 0) is export {
+    my &main = callframe(1).my<&MAIN>;
+    return $retval unless &main;
+
+    my $args;
+    for &main.candidates -> &main-candidate {
+        next unless &main-candidate ~~ SubCommand;
+        next unless &main-candidate.sub-command eq any(|@*ARGS);
+        #note &main-candidate.sub-command;
+
+        $args = order-options(&main-candidate.signature, @*ARGS);
+        last if &main.cando($args);
+    }
+
+    # the option order Perl 6 allows is crummy
+    main(|$args);
+}
+
+# Perl 6.d
+multi MAIN_HELPER($IN-as-ARGSFILES, $retval = 0) is export {
     my &main = callframe(1).my<&MAIN>;
     return $retval unless &main;
 
