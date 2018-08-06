@@ -1,3 +1,5 @@
+{{$NEXT}}
+
 v0.2	2018-08-06
 
     * Bugfix #1: Corrected problems with the META and LICENSE. (HT: @samgwise)
