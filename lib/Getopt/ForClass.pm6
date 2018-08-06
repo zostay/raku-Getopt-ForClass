@@ -1,4 +1,4 @@
-unit module Getopt::ForClass;
+unit module Getopt::ForClass:ver<0.1>:auth<github:zostay>;
 use v6;
 
 our sub order-options($sig, @args is copy) {
