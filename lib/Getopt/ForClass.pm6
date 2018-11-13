@@ -1,5 +1,5 @@
 use v6;
-unit module Getopt::ForClass:ver<0.2>:auth<github:zostay>;
+unit module Getopt::ForClass:ver<0.3>:auth<github:zostay>;
 
 our sub order-options($sig, @args is copy) {
     my (@pos, %names);
